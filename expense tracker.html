@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Expense Tracker</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f2f2f2;
+    text-align: center;
+}
+
+.container {
+    width: 400px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input, button {
+    width: 90%;
+    padding: 10px;
+    margin: 8px;
+}
+
+button {
+    background: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+li {
+    list-style: none;
+    background: #eee;
+    margin: 5px;
+    padding: 10px;
+}
+
+.delete {
+    background: red;
+    color: white;
+    padding: 5px;
+    float: right;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Expense Tracker</h2>
+
+<input type="text" id="name" placeholder="Expense name">
+
+<input type="number" id="amount" placeholder="Amount">
+
+<button onclick="addExpense()">Add Expense</button>
+
+<h3>Total: ₹<span id="total">0</span></h3>
+
+<ul id="list"></ul>
+
+</div>
+
+
+<script>
+
+let total = 0;
+
+function addExpense(){
+
+let name = document.getElementById("name").value;
+let amount = document.getElementById("amount").value;
+
+if(name=="" || amount==""){
+alert("Enter details");
+return;
+}
+
+let li = document.createElement("li");
+
+li.innerHTML =
+name + " - ₹" + amount +
+"<button class='delete' onclick='removeExpense(this,"+amount+")'>X</button>";
+
+document.getElementById("list").appendChild(li);
+
+
+total = total + Number(amount);
+
+document.getElementById("total").innerHTML = total;
+
+
+document.getElementById("name").value="";
+document.getElementById("amount").value="";
+
+}
+
+
+function removeExpense(btn,amount){
+
+btn.parentElement.remove();
+
+total = total - amount;
+
+document.getElementById("total").innerHTML = total;
+
+}
+
+</script>
+
+
+</body>
+</html>
